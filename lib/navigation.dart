@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task1/contact.dart';
 import 'package:task1/cart.dart';
-import 'package:task1/page3.dart';
-import 'package:task1/page4.dart';
 import 'package:task1/info.dart';
 import 'package:task1/discover.dart';
 import 'package:task1/home.dart';
@@ -59,7 +57,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(null),
-            label: "Discover",
+            label: "Discovers",
             backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
