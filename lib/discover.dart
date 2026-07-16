@@ -9,13 +9,14 @@ class DiscoverScreen extends StatefulWidget {
 }
 
 List list1 = [
-  ["assets/WhatsApp Image 2026-07-09 at 2.25.52 PM.jpeg", "\$45", "Watch"],
-  ["assets/WhatsApp Image 2026-07-09 at 2.25.52 PM (1).jpeg", "\$45", "Bag"],
-  ["assets/WhatsApp Image 2026-07-09 at 2.25.53 PM.jpeg", "\$45", "Watch"],
-  ["assets/WhatsApp Image 2026-07-09 at 2.25.53 PM (1).jpeg", "\$45", "Bag"],
-  ["assets/WhatsApp Image 2026-07-09 at 2.25.52 PM (1).jpeg", "\$45", "Bag"],
-  ["assets/WhatsApp Image 2026-07-09 at 2.25.52 PM.jpeg", "\$45", "Watch"],
+  ["assets/WhatsApp Image 2026-07-09 at 2.25.52 PM.jpeg", "\$45", "Watch With Crystal"],
+  ["assets/WhatsApp Image 2026-07-09 at 2.25.52 PM (1).jpeg", "\$45", "Bag For Style"],
+  ["assets/WhatsApp Image 2026-07-09 at 2.25.53 PM.jpeg", "\$45", "Watch Limited Edition"],
+  ["assets/WhatsApp Image 2026-07-09 at 2.25.53 PM (1).jpeg", "\$45", "Bag Limited Edition"],
+  ["assets/WhatsApp Image 2026-07-09 at 2.25.52 PM (1).jpeg", "\$45", "Bag  For Style"],
+  ["assets/WhatsApp Image 2026-07-09 at 2.25.52 PM.jpeg", "\$45", "Watch With Crystal"],
 ];
+Set<int> selectedFavorites = {};
 
 class _DiscoverScreenState extends State<DiscoverScreen> {
   @override
@@ -59,7 +60,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                         label:  Text(
                           "SORT",
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 20, color: Colors.black,fontFamily: GoogleFonts.roboto().fontFamily),
+                          style: TextStyle(fontSize: 20, color: Colors.black,fontFamily: GoogleFonts.roboto().fontFamily,fontWeight: FontWeight.w900),
                         ),
                       ),
 
@@ -77,7 +78,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                       label:  Text(
                         "Filter",
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 20, color: Colors.black,fontFamily: GoogleFonts.roboto().fontFamily),
+                        style: TextStyle(fontSize: 20, color: Colors.black,fontFamily: GoogleFonts.roboto().fontFamily,fontWeight: FontWeight.w900),
                       ),
                     ),
 
@@ -136,7 +137,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                       width: 300,
                       decoration: BoxDecoration(color: Colors.red.shade100),
                       child: Padding(
-                        padding: const EdgeInsets.all(12.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Column(
                           children: [
                             Align(
@@ -162,23 +163,40 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                     fontWeight: FontWeight.w200,
                                   ),
                                 ),
-                                SizedBox(width: 100),
+                                SizedBox(width: 80),
                                 Align(
-                                  alignment: AlignmentGeometry.topRight,
-                                  child: Icon(Icons.favorite_border_outlined),
+                                    alignment: AlignmentGeometry.topRight,
+                                    child:IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          if (selectedFavorites.contains(index)) {
+                                            selectedFavorites.remove(index);
+                                          } else {
+                                            selectedFavorites.add(index);
+                                          }
+                                        });
+                                      },
+                                      icon: Icon(
+                                        Icons.favorite_outlined,
+                                        color: selectedFavorites.contains(index)
+                                            ? Colors.red
+                                            : Colors.grey,
+                                      ),
+                                    ),
                                 ),
                               ],
                             ),
-                            SizedBox(height: 15),
+                            SizedBox(height: 5),
                             Align(
                               alignment: AlignmentGeometry.bottomLeft,
                               child: Text(
                                 list1[index][2].toString(),
                                 style: TextStyle(
-                                  color: Colors.black,
-                                  fontFamily: GoogleFonts.poppins().fontFamily,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black.withOpacity(.7),
+                                  fontFamily:
+                                  GoogleFonts.roboto().fontFamily,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w700,
                                 ),
                               ),
                             ),

@@ -16,6 +16,8 @@ List list1 = [
   ["assets/WhatsApp Image 2026-07-09 at 2.25.52 PM (1).jpeg", "\$43", "Bag emeral stone"],
   ["assets/WhatsApp Image 2026-07-09 at 2.25.52 PM.jpeg", "\$56", "Watch with shiner"],
 ];
+
+Set<int> selectedFavorites = {};
 class _Page3ScreenState extends State<Page3Screen> {
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class _Page3ScreenState extends State<Page3Screen> {
                   itemCount: list1.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    childAspectRatio: 0.74,
+                    childAspectRatio: 0.7,
                     crossAxisSpacing: 12,
                     mainAxisSpacing: 12,
                   ),
@@ -70,9 +72,24 @@ class _Page3ScreenState extends State<Page3Screen> {
                                     fontSize: 12,
                                     fontWeight: FontWeight.w900,
                                   ),
-                                ),SizedBox(width: 100,),  Align(
+                                ),SizedBox(width: 80,),  Align(
                                   alignment: AlignmentGeometry.topRight,
-                                  child: Icon(Icons.favorite_outline,)
+                                  child: IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        if (selectedFavorites.contains(index)) {
+                                          selectedFavorites.remove(index);
+                                        } else {
+                                          selectedFavorites.add(index);
+                                        }
+                                      });
+                                    },
+                                    icon: Icon(
+                                      Icons.favorite,
+                                      color: selectedFavorites.contains(index)
+                                          ? Colors.red
+                                          : Colors.grey,
+                                    )  ),
                                 ),
                               ],
                               

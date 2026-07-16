@@ -52,7 +52,7 @@ class _Page4ScreenState extends State<Page4Screen> {
                                 fit: BoxFit.cover,
                               ),
                             ),
-                          ),
+                          ), Divider(thickness: 1,),
                           SizedBox(width: 15),
 
                           Column(
@@ -129,12 +129,12 @@ class _Page4ScreenState extends State<Page4Screen> {
                                         disabledBackgroundColor: Colors.black,
                                         backgroundColor: Colors.red.shade100,
                                         shape: ContinuousRectangleBorder(),
-                                        iconColor: Colors.black,
+                                        iconColor: Colors.black,side: BorderSide(color: Colors.black,width: 3), minimumSize: const Size(120, 30),
                                       ),
                                       onPressed: () {},
                                       child: Text(
                                         "Move\nWishlist",
-                                        textAlign: TextAlign.center,
+                                        textAlign: TextAlign.start,
                                         style: TextStyle(
                                           fontSize: 12,
                                           color: Colors.black,

@@ -34,6 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
         centerTitle: true,
       ),
+
+
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
         child: Column(
@@ -50,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.only(right: 6),
+                    padding: const EdgeInsets.only(right: 8),
                     child: Center(
                       child: Column(
                         children: [

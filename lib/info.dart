@@ -9,13 +9,17 @@ class InfoScreen extends StatefulWidget {
 }
 
 List list1 = [
-  ["assets/bag1.jpg", "\$55", "Yellow BAG"],
-  ["assets/bag2.jpg", "\$65", "Mini BAG"],
-  ["assets/chain1.jpg", "\$75", "Evil Chain"],
-  ["assets/img1.jpg", "\$85", "White Dress"],
-  ["assets/watch.jpg", "\$35", "Gem Watch"],
-  ["assets/watch.jpg.2.jpg", "\$25", "Marbal Watch"],
+  ["assets/bag1.jpg", "\$55", "Yellow BAG With leather"],
+  ["assets/bag2.jpg", "\$65", "Mini BAG With Crystal"],
+  ["assets/chain1.jpg", "\$75", "Evil Chain With Luck"],
+  ["assets/img1.jpg", "\$85", "White Dress For Wedding"],
+  ["assets/watch.jpg", "\$35", "Gem Watch With Gems"],
+  ["assets/watch.jpg.2.jpg", "\$25", "Marbal Watch With Marbal"],
 ];
+
+Set<int> selectedFavorites = {};
+int selectedButton = -1;
+
 
 class _InfoScreenState extends State<InfoScreen> {
   List<bool> isFavorite = List.generate(list1.length, (_) => false);
@@ -54,27 +58,32 @@ class _InfoScreenState extends State<InfoScreen> {
             SizedBox(height: 12),
 
             Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
                     child: OutlinedButton.icon(
-                      icon: Icon(Icons.sort, color: Colors.black,size: 28,),
+                      onPressed: () {
+                        setState(() {
+                          selectedButton = selectedButton == 0 ? -1 : 0;
+                        });
+                      },
                       style: OutlinedButton.styleFrom(
-                        backgroundColor: Colors.red.shade100,
-                        shape: BeveledRectangleBorder(),
+                        backgroundColor:
+                        selectedButton == 0 ? Colors.black : Colors.transparent,
+                        side: const BorderSide(color: Colors.black),shape: BeveledRectangleBorder()
                       ),
-                      onPressed: () {},
+                      icon: Icon(
+                        Icons.sort,
+                        color: selectedButton == 0 ? Colors.white : Colors.black,size: 28
+                      ),
                       label: Text(
                         "SORT",
-                        textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: GoogleFonts.roboto().fontFamily,
+                          color: selectedButton == 0 ? Colors.white : Colors.black,fontWeight: FontWeight.bold,
+                          fontFamily: GoogleFonts.roboto().fontFamily,fontSize: 16,
                         ),
                       ),
                     ),
@@ -83,23 +92,25 @@ class _InfoScreenState extends State<InfoScreen> {
                   SizedBox(width: 20),
                   Expanded(
                     child: OutlinedButton.icon(
+                      onPressed: () {
+                        setState(() {
+                          selectedButton = selectedButton == 1 ? -1 : 1;
+                        });
+                      },
+                      style: OutlinedButton.styleFrom(
+                        backgroundColor:
+                        selectedButton == 1 ? Colors.black : Colors.transparent,
+                        side: const BorderSide(color: Colors.black),shape: BeveledRectangleBorder()
+                      ),
                       icon: Icon(
                         Icons.filter_alt_outlined,
-                        color: Colors.white,size: 28,
+                        color: selectedButton == 1 ? Colors.white : Colors.black,size: 28
                       ),
-                      style: OutlinedButton.styleFrom(
-                        backgroundColor: Colors.black,
-                        shape: BeveledRectangleBorder(),
-                      ),
-                      onPressed: () {},
                       label: Text(
                         "FILTER",
-                        textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: GoogleFonts.roboto().fontFamily,
+                          color: selectedButton == 1 ? Colors.white : Colors.black,fontWeight: FontWeight.bold,
+                          fontFamily: GoogleFonts.roboto().fontFamily,fontSize: 16,
                         ),
                       ),
                     ),
@@ -117,9 +128,9 @@ class _InfoScreenState extends State<InfoScreen> {
               itemCount: list1.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 0.6,
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 12,
+                childAspectRatio: 0.58,
+                crossAxisSpacing: 8,
+                mainAxisSpacing: 10,
               ),
               itemBuilder: (context, index) {
                 return Container(
@@ -153,14 +164,29 @@ class _InfoScreenState extends State<InfoScreen> {
                                 fontWeight: FontWeight.w900,
                               ),
                             ),
-                            SizedBox(width: 100),
+                            SizedBox(width: 80),
                             Align(
                               alignment: AlignmentGeometry.topRight,
-                              child: Icon(Icons.favorite_border_outlined),
-                            ),
+                              child:IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    if (selectedFavorites.contains(index)) {
+                                      selectedFavorites.remove(index);
+                                    } else {
+                                      selectedFavorites.add(index);
+                                    }
+                                  });
+                                },
+                                icon: Icon(
+                                  Icons.favorite_outline_outlined,
+                                  color: selectedFavorites.contains(index)
+                                      ? Colors.red
+                                      : Colors.grey,
+                                ),
+                              ),),
                           ],
                         ),
-                        SizedBox(height: 15),
+                        SizedBox(height: 5),
                         Align(
                           alignment: AlignmentGeometry.bottomLeft,
                           child: Text(
@@ -169,7 +195,7 @@ class _InfoScreenState extends State<InfoScreen> {
                               color: Colors.black.withOpacity(.7),
                               fontFamily:
                                   GoogleFonts.roboto().fontFamily,
-                              fontSize: 18,
+                              fontSize: 12,
                               fontWeight: FontWeight.w700,
                             ),
                           ),

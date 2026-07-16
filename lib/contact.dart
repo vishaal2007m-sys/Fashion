@@ -64,11 +64,11 @@ class _ContactScreenState extends State<ContactScreen> {
                             ),
                             title: Text(
                               list[index][1].toString(),
-                              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black.withOpacity(.7),fontFamily: GoogleFonts.playfairDisplay().fontFamily),
+                              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black.withOpacity(.7),fontFamily: GoogleFonts.roboto().fontFamily),
                             ),
                             subtitle: Text(
                               list[index][2].toString(),
-                              style: TextStyle(fontWeight: FontWeight.bold,fontFamily: GoogleFonts.playfairDisplay().fontFamily),
+                              style: TextStyle(fontWeight: FontWeight.bold,fontFamily: GoogleFonts.roboto().fontFamily),
                             ),
                           ),
                         ),
